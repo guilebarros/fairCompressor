@@ -5,6 +5,11 @@
               companyWebsite="instagram/guilebarros">
   <MAINGROUP id="i2qim7" name="fairCompressor">
     <GROUP id="{F641E3DA-73A8-B5FB-DD1C-930890999384}" name="Source">
+      <GROUP id="{9FEDFB38-44BC-911A-61F6-1D6662CBF8C8}" name="GUI">
+        <GROUP id="{7857A9C5-4D58-9EFA-D61A-9155DB9070EB}" name="Sliders">
+          <FILE id="phXiKd" name="SliderProps.cpp" compile="1" resource="0" file="Source/GUI/Sliders/SliderProps.cpp"/>
+        </GROUP>
+      </GROUP>
       <FILE id="L4fKQd" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="CD8LyI" name="PluginProcessor.h" compile="0" resource="0"

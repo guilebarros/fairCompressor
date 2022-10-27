@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin editor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -13,9 +5,12 @@
 FairCompressorAudioProcessorEditor::FairCompressorAudioProcessorEditor (FairCompressorAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    for (int i = 0; i < dials.size(); i++)
+    {
+        setCommonSliderProps(*dials[i]);
+    }
+
+    setSize (1000, 500);
 }
 
 FairCompressorAudioProcessorEditor::~FairCompressorAudioProcessorEditor()
@@ -25,16 +20,27 @@ FairCompressorAudioProcessorEditor::~FairCompressorAudioProcessorEditor()
 //==============================================================================
 void FairCompressorAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
+    // o component eh opaco, entao devemos preencher o background com uma cor solida
+    g.setGradientFill(juce::ColourGradient::vertical(juce::Colour::fromRGB(48, 42, 53).darker(0.75), getHeight(), juce::Colour::fromRGB(40, 42, 53).brighter(0.02f), getHeight() * 0.4f));
+    g.fillRect(getLocalBounds());
 
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void FairCompressorAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    
+    for (int i = 0; i < dials.size(); i++)
+    {
+        if(i == 0) // checa se eh o primeiro slider
+        {
+            dials[i]->setBounds(24, 100, 140, 140);
+        }
+        
+        else // baseados no slider anterior (i - 1)
+        {
+            dials[i]->setBounds(dials[i - 1]->getX() + dials[i - 1]->getWidth(), 100, 140, 140);
+        }
+    }
+
+
 }

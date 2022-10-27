@@ -220,8 +220,8 @@ bool FairCompressorAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* FairCompressorAudioProcessor::createEditor()
 {
-    // return new FairCompressorAudioProcessorEditor (*this);
-    return new juce::GenericAudioProcessorEditor (*this);
+     return new FairCompressorAudioProcessorEditor (*this);
+    // return new juce::GenericAudioProcessorEditor (*this);
 }
 
 //==============================================================================
