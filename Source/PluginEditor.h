@@ -2,6 +2,7 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "./GUI/LookAndFeel/DialLAF.h"
 
 
 class FairCompressorAudioProcessorEditor  : public juce::AudioProcessorEditor
@@ -25,13 +26,34 @@ private:
     juce::Slider releaseDial;
     juce::Slider outputDial;
     
+    DialStyle customDialLAF;
+    
+    juce::DropShadow shadowProperties;
+    juce::DropShadowEffect dialShadow;
+    
+    
     std::vector<juce::Slider*> dials =
     {
         &inputDial, &threshDial, &ratioDial,
         &attackDial, &releaseDial, &outputDial,
     };
     
+    juce::Label inputDialLabel;
+    juce::Label threshDialLabel;
+    juce::Label ratioDialLabel;
+    juce::Label attackDialLabel;
+    juce::Label releaseDialLabel;
+    juce::Label outputDialLabel;
+    
+    std::vector<juce::Label*> dialLabels =
+    {
+        &inputDialLabel, &threshDialLabel, &ratioDialLabel,
+        &attackDialLabel, &releaseDialLabel, &outputDialLabel,
+    };
+    
     void setCommonSliderProps(juce::Slider& slider);
+    void setCommonLabelProps(juce::Label& label);
 
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (FairCompressorAudioProcessorEditor)
 };

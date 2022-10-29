@@ -4,17 +4,42 @@
 //==============================================================================
 FairCompressorAudioProcessorEditor::FairCompressorAudioProcessorEditor (FairCompressorAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
+, inputDialLabel("Input", "Input")
+, threshDialLabel("Thresh", "Thresh")
+, ratioDialLabel("Ratio", "Ratio")
+, attackDialLabel("Attack", "Attack")
+, releaseDialLabel("Release", "Release")
+, outputDialLabel("Output", "Output")
+
 {
     for (int i = 0; i < dials.size(); i++)
     {
         setCommonSliderProps(*dials[i]);
     }
-
+    
+    for (int i = 0; i < dialLabels.size(); i++)
+    {
+        setCommonLabelProps(*dialLabels[i]);
+        dialLabels[i]->attachToComponent(dials[i], false);
+    }
+    
     setSize (1000, 500);
+
+    juce::AudioProcessorEditor::setResizable(true, true);
+    juce::AudioProcessorEditor::setResizeLimits(getWidth() * 0.75f, getHeight() * 0.75f, getWidth() * 1.25, getHeight() * 1.25);
+    juce::AudioProcessorEditor::getConstrainer()->setFixedAspectRatio(2.0);
+    
+    
 }
 
 FairCompressorAudioProcessorEditor::~FairCompressorAudioProcessorEditor()
 {
+    for (auto& dial : dials)
+    {
+        dial->setLookAndFeel(nullptr);
+    }
+    dials.clear();
+    dials.shrink_to_fit();
 }
 
 //==============================================================================
@@ -29,18 +54,20 @@ void FairCompressorAudioProcessorEditor::paint (juce::Graphics& g)
 void FairCompressorAudioProcessorEditor::resized()
 {
     
-    for (int i = 0; i < dials.size(); i++)
-    {
-        if(i == 0) // checa se eh o primeiro slider
-        {
-            dials[i]->setBounds(24, 100, 140, 140);
-        }
-        
-        else // baseados no slider anterior (i - 1)
-        {
-            dials[i]->setBounds(dials[i - 1]->getX() + dials[i - 1]->getWidth(), 100, 140, 140);
-        }
-    }
+    auto dialSize = getWidth() * 0.18f;
+    auto mainLeftMargin = getWidth() * 0.25f;
+    auto leftMargin = getWidth() * 0.03f;
+    auto secondRowHeight = 1.3f;
+    
+    inputDial.setBounds(leftMargin, 50, dialSize, dialSize);
+    threshDial.setBounds(mainLeftMargin, 50, dialSize, dialSize);
+    ratioDial.setBounds(threshDial.getX() + threshDial.getWidth(),50, dialSize, dialSize);
+    
+    outputDial.setBounds(leftMargin, inputDial.getY() + inputDial.getHeight() * secondRowHeight, dialSize, dialSize);
+    attackDial.setBounds(threshDial.getX(), outputDial.getY(), dialSize, dialSize);
+    releaseDial.setBounds(ratioDial.getX(), outputDial.getY(), dialSize, dialSize);
+    
 
+    
 
 }
