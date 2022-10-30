@@ -3,33 +3,32 @@
 
 //==============================================================================
 FairCompressorAudioProcessorEditor::FairCompressorAudioProcessorEditor (FairCompressorAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+: AudioProcessorEditor (&p), audioProcessor (p)
 , inputDialLabel("Input", "Input")
 , threshDialLabel("Thresh", "Thresh")
 , ratioDialLabel("Ratio", "Ratio")
 , attackDialLabel("Attack", "Attack")
 , releaseDialLabel("Release", "Release")
 , outputDialLabel("Output", "Output")
-
 {
-    for (int i = 0; i < dials.size(); i++)
-    {
-        setCommonSliderProps(*dials[i]);
-    }
-    
-    for (int i = 0; i < dialLabels.size(); i++)
-    {
-        setCommonLabelProps(*dialLabels[i]);
-        dialLabels[i]->attachToComponent(dials[i], false);
-    }
-    
-    setSize (1000, 500);
+for (int i = 0; i < dials.size(); i++)
+{
+    setCommonSliderProps(*dials[i]);
+}
 
-    juce::AudioProcessorEditor::setResizable(true, true);
-    juce::AudioProcessorEditor::setResizeLimits(getWidth() * 0.75f, getHeight() * 0.75f, getWidth() * 1.25, getHeight() * 1.25);
-    juce::AudioProcessorEditor::getConstrainer()->setFixedAspectRatio(2.0);
-    
-    
+attachSliders();
+
+for (int i = 0; i < dialLabels.size(); i++)
+{
+    setCommonLabelProps(*dialLabels[i]);
+    dialLabels[i]->attachToComponent(dials[i], false);
+}
+
+
+setSize (1000, 500);
+juce::AudioProcessorEditor::setResizable(true, true);
+juce::AudioProcessorEditor::setResizeLimits(getWidth() * 0.75, getHeight() * 0.75, getWidth() * 1.25, getHeight() * 1.25);
+juce::AudioProcessorEditor::getConstrainer()->setFixedAspectRatio(2.0);
 }
 
 FairCompressorAudioProcessorEditor::~FairCompressorAudioProcessorEditor()

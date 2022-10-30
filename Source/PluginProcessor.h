@@ -1,6 +1,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "./Parameters/Parameters.h"
 
 
 class FairCompressorAudioProcessor  : public juce::AudioProcessor,

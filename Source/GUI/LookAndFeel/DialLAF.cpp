@@ -1,17 +1,12 @@
 #include "DialLAF.h"
 
-void DialStyle::drawRotarySlider
-(
-    juce::Graphics &g,
-    int x,
-    int y,
-    int width,
-    int height,
-    float sliderPos,
-    float rotaryStartAngle,
-    float rotaryEndAngle,
-    juce::Slider &slider
-)
+DialStyle::DialStyle()
+{
+    
+}
+
+void DialStyle::drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
+                                       const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
 {
     /** Define color variables for customization. */
     const auto outlineColor  = slider.findColour (juce::Slider::rotarySliderOutlineColourId);
@@ -28,7 +23,7 @@ void DialStyle::drawRotarySlider
     sliderWidth = width;
     
     /** Dot color*/
-    g.setColour (mainColor);
+    g.setColour (juce::Colours::whitesmoke.withAlpha(0.5f));
     centre = dialBounds.getCentre();
 
     /** Draw dots */
@@ -95,6 +90,8 @@ void DialStyle::drawRotarySlider
         
         g.fillEllipse (centre.getX() - dialRadius, centre.getY() - dialRadius, dialRadius * 2.0f, dialRadius * 2.0f);
     }
+    
+    //dialRadius = std:: max (dialRadius - 4.0f, 10.0f);
     
     /** Dial outline color*/
     g.setColour (dialOutlineColor);
@@ -164,6 +161,5 @@ void DialStyle::drawLabel (juce::Graphics& g, juce::Label& label)
 
     g.drawRect (label.getLocalBounds());
 }
-
 
 

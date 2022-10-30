@@ -38,6 +38,15 @@ private:
         &attackDial, &releaseDial, &outputDial,
     };
     
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> inputAttach;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> threshAttach;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> ratioAttach;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> attackAttach;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> releaseAttach;
+    std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> outputAttach;
+    
+    void attachSliders();
+    
     juce::Label inputDialLabel;
     juce::Label threshDialLabel;
     juce::Label ratioDialLabel;
